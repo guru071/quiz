@@ -2,9 +2,12 @@
 from tkinter import *
 from tkinter.font import *
 from tkinter import messagebox
+from tkinter import filedialog
 import os
 import csv
 root = Tk()
+root.iconbitmap("C:/Users/gurup/OneDrive/Desktop/quiz_/maghs_icon.ico")
+root.title("quiz_writer")
 root.geometry("700x500")
 root.resizable(False, False)
 root.configure(background="#8d99ae")
@@ -52,6 +55,15 @@ class c:
             self.option4.delete(0, END)
         except :
             self.msg=messagebox.showerror("Error","conform the path")
+    def browse(self):
+
+        file_path = filedialog.asksaveasfilename(
+            title="Create CSV File",
+            defaultextension=".csv",  # Default extension
+            filetypes=[("CSV files", "*.csv"), ("All files", "*.*")],
+            initialfile="untitled.csv"  # Default filename
+        )
+        self.path.insert(0,END)
     def __init__(self):
         self.ans=0
         self.current = os.getcwd() + "\\" + "untitled.csv"
@@ -71,6 +83,7 @@ class c:
         )
         self.path.grid(row=0,column=1)
         self.file_create()
+        Button(self.frame1,text="Browse",font=fnt,command=self.browse).grid(padx=20,row=0,column=3)
         self.frame2 = Frame(root,bg="#8d99ae")
         self.frame2.grid(row=1,column=0)
         self.conform1=Button(
